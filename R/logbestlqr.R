@@ -1,0 +1,25 @@
+Log.best.lqr = function(y,x,p=0.5,a=0,b=1,epsilon = 0.001,precision = 10^-6,criterion = "AIC")
+{
+  cat('\n')
+  call <- match.call()
+  cat("Call:\n")
+  print(call)
+  cat('\n')
+  
+  ynovo = log((y - a + epsilon)/(b - y + epsilon))
+  
+  output = best.lqr(y = ynovo,x = x,p=p,precision,criterion)
+  cat('\n')
+  cat('\n')
+  cat('***\n')
+  cat('The function below converts the logistic quantile prediction curve (predlog) to the original quantile predicted curve for the bounded response. See example.\n')
+  cat('\n')
+  cat('pred = function(predlog,a,b)\n')
+  cat('{\n')
+  cat('  return((b*exp(predlog)+a)/(1+exp(predlog)))\n')
+  cat('}\n')
+  cat('\n')
+  cat('The interpretation of the regression coefficients is analogous to the interpretation of the coefficients of a logistic regression for binary outcomes. For references, please check Bottai et.al. (2009) Logistic quantile regression for bounded outcomes.\n')
+  cat('\n')
+  return(output)
+}
